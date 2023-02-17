@@ -40,14 +40,24 @@ body {
 
 /* LAYOUT */
 
-.container {
+.main-container {
   display: flex;
   background-color: var(--color-secondary);
   padding: 0.2em 0.3em;
   border-radius: 0.5em;
+  overflow-x: hidden;
+}
+
+.switch-container {
+  display: flex;
   gap: 0.5em;
-  overflow: hidden;
+
   z-index: 0;
+  position: relative;
+}
+
+.drag {
+  transform: rotate(90deg);
 }
 
 .switch {
@@ -61,7 +71,7 @@ body {
   opacity: 0.5;
 }
 
-.highlighted {
+.highlighted .text {
   opacity: 1;
 }
 
