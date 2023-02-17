@@ -4,25 +4,25 @@ import "./style.css";
 
 gsap.registerPlugin(Flip);
 
-const switches = document.querySelectorAll(".switch");
+const container = document.querySelector(".container");
 const highlight = document.querySelector(".highlight");
-const texts = document.querySelectorAll(".text");
 
-switches.forEach((switchEl) => {
-  switchEl.addEventListener("mouseover", () => {
-    // Move the highlight between the switches
-    const highlightState = Flip.getState(highlight);
-    switchEl.appendChild(highlight);
-    Flip.from(highlightState, {
-      duration: 0.3,
-    });
+// Using event delegation to listen for mouseover events on the container
+container.addEventListener("mouseover", (event) => {
+  // Find the switch that was hovered
+  const switchEl = event.target.closest(".switch");
+  if (!switchEl) return;
 
-    // Change the text opacity
-    gsap.set(texts, { opacity: 0.5 });
-
-    gsap.to(switchEl.querySelector(".text"), {
-      opacity: 1,
-      duration: 0,
-    });
+  // Move the highlight between the switches using Flip
+  const highlightState = Flip.getState(highlight);
+  switchEl.appendChild(highlight);
+  Flip.from(highlightState, {
+    duration: 0.3,
   });
+
+  // Change the text opacity of the hovered switch
+  container.querySelectorAll(".text").forEach((el) => {
+    el.classList.remove("highlighted");
+  });
+  switchEl.querySelector(".text").classList.add("highlighted");
 });

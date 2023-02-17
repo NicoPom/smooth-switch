@@ -45,7 +45,7 @@ body {
   background-color: var(--color-secondary);
   padding: 0.2em 0.3em;
   border-radius: 0.5em;
-  gap: 0.8em;
+  gap: 0.5em;
   overflow: hidden;
   z-index: 0;
 }
@@ -61,6 +61,11 @@ body {
   opacity: 0.5;
 }
 
+.highlighted {
+  opacity: 1;
+}
+
+/* the highlight rectangle */
 .highlight {
   position: absolute;
   top: 0;
