@@ -6,59 +6,76 @@ gsap.registerPlugin(Flip);
 
 const mainContainer = document.querySelector(".main-container");
 const switchContainer = document.querySelector(".switch-container");
+const switchWrapper = document.querySelector(".switch-wrapper");
 const highlight = document.querySelector(".highlight");
-const switches = switchContainer.querySelectorAll(".switch");
-const firstSwitch = switches[0];
+const switches = Array.from(switchContainer.querySelectorAll(".switch"));
+const activeSwitch = switches[0];
 
-//
-gsap.set(switchContainer, {
-  width: firstSwitch.offsetWidth + "px",
+const initialSwitchContainerState = {
+  width: `${activeSwitch.offsetWidth}px`,
   overflow: "hidden",
   translate: 0,
-});
+};
 
-mainContainer.addEventListener("mouseenter", () => {
-  gsap.to(mainContainer, { maxWidth: "100%", duration: 0.5 });
+gsap.set(switchContainer, initialSwitchContainerState);
+
+const expandSwitchContainer = () => {
+  gsap.to(mainContainer, { maxWidth: "400px", duration: 0.5 });
   gsap.to(switchContainer, {
     width: "100%",
     overflow: "hidden",
-    translate: 0,
     duration: 0.5,
   });
-});
+  gsap.to(switchWrapper, { translate: 0, duration: 0.5 });
+};
 
-mainContainer.addEventListener("mouseleave", () => {
-  const selectedSwitch = switchContainer.querySelector(".selected");
-  const targetSwitch = selectedSwitch || firstSwitch;
+const contractSwitchContainer = () => {
+  const selectedSwitch =
+    switchContainer.querySelector(".selected") || activeSwitch;
+  const targetWidth = `${selectedSwitch.offsetWidth}px`;
+
   gsap.to(switchContainer, {
-    width: targetSwitch.offsetWidth + "px",
+    width: targetWidth,
     duration: 0.3,
   });
-});
+};
 
-switchContainer.addEventListener("mouseover", (event) => {
-  const switchEl = event.target.closest(".switch");
-  if (!switchEl) return;
-
+const highlightSwitch = (switchEl) => {
   const highlightState = Flip.getState(highlight);
   switchEl.appendChild(highlight);
   Flip.from(highlightState, { duration: 0.3 });
 
   switches.forEach((el) => el.classList.remove("highlighted"));
   switchEl.classList.add("highlighted");
+};
+
+const selectSwitch = (switchEl) => {
+  switches.forEach((el) => el.classList.remove("selected"));
+  switchEl.classList.add("selected");
+
+  const targetTranslate = `${-switchEl.offsetLeft}px`;
+  const targetWidth = `${switchEl.offsetWidth}px`;
+
+  gsap.to(switchWrapper, {
+    translate: targetTranslate,
+    width: targetWidth,
+    duration: 0.3,
+  });
+};
+
+mainContainer.addEventListener("mouseenter", expandSwitchContainer);
+mainContainer.addEventListener("mouseleave", contractSwitchContainer);
+
+switchContainer.addEventListener("mouseover", (event) => {
+  const switchEl = event.target.closest(".switch");
+  if (!switchEl) return;
+
+  highlightSwitch(switchEl);
 });
 
 switchContainer.addEventListener("click", (event) => {
   const switchEl = event.target.closest(".switch");
   if (!switchEl) return;
 
-  switches.forEach((el) => el.classList.remove("selected"));
-  switchEl.classList.add("selected");
-
-  gsap.to(switchContainer, {
-    overflow: "visible",
-    translate: -switchEl.offsetLeft + "px",
-    width: switchEl.offsetWidth + "px",
-    duration: 0.3,
-  });
+  selectSwitch(switchEl);
 });

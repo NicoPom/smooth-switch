@@ -41,6 +41,9 @@ body {
 /* LAYOUT */
 
 .main-container {
+  position: absolute;
+  left: 20%;
+
   display: flex;
   background-color: var(--color-secondary);
   padding: 0.2em 0.3em;
@@ -48,10 +51,9 @@ body {
   overflow-x: hidden;
 }
 
-.switch-container {
+.switch-wrapper {
   display: flex;
   gap: 0.5em;
-
   z-index: 0;
   position: relative;
 }
