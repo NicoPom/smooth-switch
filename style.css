@@ -43,18 +43,19 @@ body {
   background-color: var(--color-secondary);
   padding: 0.2em 0.3em;
   border-radius: 0.5em;
-  overflow-x: hidden;
+  align-items: center;
 }
 
 .switch-wrapper {
   display: flex;
   gap: 0.5em;
-  z-index: 0;
   position: relative;
 }
 
 .drag {
-  transform: rotate(90deg);
+  transform: rotate(90deg) translateY(-0.5em);
+
+  height: 1em;
 }
 
 .switch {

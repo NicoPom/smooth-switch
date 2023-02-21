@@ -22,7 +22,7 @@ gsap.set(switchContainer, initialSwitchContainerState);
 const expandSwitchContainer = () => {
   gsap.to(mainContainer, { maxWidth: "400px", duration: 0.5 });
   gsap.to(switchContainer, {
-    width: "100%",
+    width: "230px",
     overflow: "hidden",
     duration: 0.5,
   });
@@ -78,4 +78,5 @@ switchContainer.addEventListener("click", (event) => {
   if (!switchEl) return;
 
   selectSwitch(switchEl);
+  contractSwitchContainer();
 });
