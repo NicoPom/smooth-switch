@@ -37,13 +37,12 @@ body {
 
 /* LAYOUT */
 .main-container {
-  position: absolute;
-  left: 20%;
   display: flex;
   background-color: var(--color-secondary);
   padding: 0.2em 0.5em 0.2em 0.2em;
   border-radius: 0.2em;
   align-items: center;
+  position: relative;
 }
 
 .switch-container {
