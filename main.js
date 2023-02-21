@@ -20,13 +20,13 @@ const initialSwitchContainerState = {
 gsap.set(switchContainer, initialSwitchContainerState);
 
 const expandSwitchContainer = () => {
-  gsap.to(mainContainer, { maxWidth: "265px", duration: 0.5 });
+  gsap.to(mainContainer, { maxWidth: "265px", duration: 0.3 });
   gsap.to(switchContainer, {
     width: "210px",
     overflow: "hidden",
-    duration: 0.5,
+    duration: 0.3,
   });
-  gsap.to(switchWrapper, { width: "210px", translate: 0, duration: 0.5 });
+  gsap.to(switchWrapper, { width: "210px", translate: 0, duration: 0.3 });
 };
 
 const contractSwitchContainer = () => {
@@ -40,12 +40,7 @@ const contractSwitchContainer = () => {
   });
 
   // flip highlight back to active switch
-  const highlightState = Flip.getState(highlight);
-  activeSwitch.appendChild(highlight);
-  Flip.from(highlightState, { duration: 0.3 });
-
-  switches.forEach((el) => el.classList.remove("highlighted"));
-  activeSwitch.classList.add("highlighted");
+  highlightSwitch(activeSwitch);
   const targetTranslate = `${-activeSwitch.offsetLeft}px`;
 
   gsap.to(switchWrapper, {
