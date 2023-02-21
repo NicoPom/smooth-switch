@@ -20,13 +20,13 @@ const initialSwitchContainerState = {
 gsap.set(switchContainer, initialSwitchContainerState);
 
 const expandSwitchContainer = () => {
-  gsap.to(mainContainer, { maxWidth: "300px", duration: 0.5 });
+  gsap.to(mainContainer, { maxWidth: "265px", duration: 0.5 });
   gsap.to(switchContainer, {
-    width: "250px",
+    width: "210px",
     overflow: "hidden",
     duration: 0.5,
   });
-  gsap.to(switchWrapper, { width: "250px", translate: 0, duration: 0.5 });
+  gsap.to(switchWrapper, { width: "210px", translate: 0, duration: 0.5 });
 };
 
 const contractSwitchContainer = () => {
