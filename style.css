@@ -41,9 +41,13 @@ body {
   left: 20%;
   display: flex;
   background-color: var(--color-secondary);
-  padding: 0.2em 0.3em;
+  padding: 0.2em 0.5em 0.2em 0.2em;
   border-radius: 0.5em;
   align-items: center;
+}
+
+.switch-container {
+  flex: 1;
 }
 
 .switch-wrapper {
@@ -53,7 +57,9 @@ body {
 }
 
 .drag {
-  transform: rotate(90deg) translateY(-0.5em);
+  position: absolute;
+  transform: rotate(90deg) translateY(-25%);
+  right: 0;
 
   height: 1em;
 }

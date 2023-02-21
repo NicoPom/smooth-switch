@@ -9,7 +9,7 @@ const switchContainer = document.querySelector(".switch-container");
 const switchWrapper = document.querySelector(".switch-wrapper");
 const highlight = document.querySelector(".highlight");
 const switches = Array.from(switchContainer.querySelectorAll(".switch"));
-const activeSwitch = switches[0];
+let activeSwitch = switches[0];
 
 const initialSwitchContainerState = {
   width: `${activeSwitch.offsetWidth}px`,
@@ -20,13 +20,13 @@ const initialSwitchContainerState = {
 gsap.set(switchContainer, initialSwitchContainerState);
 
 const expandSwitchContainer = () => {
-  gsap.to(mainContainer, { maxWidth: "400px", duration: 0.5 });
+  gsap.to(mainContainer, { maxWidth: "300px", duration: 0.5 });
   gsap.to(switchContainer, {
-    width: "230px",
+    width: "250px",
     overflow: "hidden",
     duration: 0.5,
   });
-  gsap.to(switchWrapper, { translate: 0, duration: 0.5 });
+  gsap.to(switchWrapper, { width: "250px", translate: 0, duration: 0.5 });
 };
 
 const contractSwitchContainer = () => {
@@ -36,6 +36,21 @@ const contractSwitchContainer = () => {
 
   gsap.to(switchContainer, {
     width: targetWidth,
+    duration: 0.3,
+  });
+
+  // flip highlight back to active switch
+  const highlightState = Flip.getState(highlight);
+  activeSwitch.appendChild(highlight);
+  Flip.from(highlightState, { duration: 0.3 });
+
+  switches.forEach((el) => el.classList.remove("highlighted"));
+  activeSwitch.classList.add("highlighted");
+  const targetTranslate = `${-activeSwitch.offsetLeft}px`;
+
+  gsap.to(switchWrapper, {
+    translate: targetTranslate,
+
     duration: 0.3,
   });
 };
@@ -50,6 +65,7 @@ const highlightSwitch = (switchEl) => {
 };
 
 const selectSwitch = (switchEl) => {
+  activeSwitch = switchEl;
   switches.forEach((el) => el.classList.remove("selected"));
   switchEl.classList.add("selected");
 
