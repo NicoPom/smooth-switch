@@ -11,25 +11,6 @@ const switchWrapper = document.querySelector(".switch-wrapper");
 const highlight = document.querySelector(".highlight");
 const switches = Array.from(switchContainer.querySelectorAll(".switch"));
 
-// Event listeners
-mainContainer.addEventListener("mouseenter", expandSwitchContainer);
-mainContainer.addEventListener("mouseleave", contractSwitchContainer);
-
-switchContainer.addEventListener("mouseover", (event) => {
-  const switchEl = event.target.closest(".switch");
-  if (!switchEl) return;
-
-  highlightSwitch(switchEl);
-});
-
-switchContainer.addEventListener("click", (event) => {
-  const switchEl = event.target.closest(".switch");
-  if (!switchEl) return;
-
-  selectSwitch(switchEl);
-  contractSwitchContainer();
-});
-
 // Store the currently active switch
 let activeSwitch = switches[0];
 
@@ -98,3 +79,22 @@ const selectSwitch = (switchEl) => {
     duration: 0.3,
   });
 };
+
+// Event listeners
+mainContainer.addEventListener("mouseenter", expandSwitchContainer);
+mainContainer.addEventListener("mouseleave", contractSwitchContainer);
+
+switchContainer.addEventListener("mouseover", (event) => {
+  const switchEl = event.target.closest(".switch");
+  if (!switchEl) return;
+
+  highlightSwitch(switchEl);
+});
+
+switchContainer.addEventListener("click", (event) => {
+  const switchEl = event.target.closest(".switch");
+  if (!switchEl) return;
+
+  selectSwitch(switchEl);
+  contractSwitchContainer();
+});
