@@ -20,7 +20,6 @@ const initialSwitchContainerState = {
 gsap.set(switchContainer, initialSwitchContainerState);
 
 const expandSwitchContainer = () => {
-  gsap.to(mainContainer, { maxWidth: "265px", duration: 0.3 });
   gsap.to(switchContainer, {
     width: "210px",
     overflow: "hidden",
